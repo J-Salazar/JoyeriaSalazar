@@ -10942,3 +10942,7 @@ a.text-dark:focus {
   }
 }
 
+.bg-gradient {
+  background: linear-gradient(#DFDEFF, #ffffff);
+}
+
