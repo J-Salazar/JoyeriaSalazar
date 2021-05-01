@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
@@ -15,6 +16,9 @@ class ClienteController extends Controller
     public function index()
     {
         //
+        $clientes = DB::table('clientes')->paginate(5);
+
+        return view('usuario.clientes', ['clientes' => $clientes]);
     }
 
     /**
@@ -81,5 +85,28 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+    }
+
+    public function registrar()
+    {
+        return view('usuario.agregarclientes');
+    }
+
+    public function registro(Request $request)
+    {
+        $cliente = new Cliente([
+
+            "nombre" => $request->get('nombre'),
+            "apellido" => $request->get('apellido'),
+            "correo" => $request->get('correo'),
+            "dni" => $request->get('dni'),
+            "telefono" => $request->get('telefono'),
+
+
+        ]);
+        $cliente->save(); // Finally, save the record.
+
+
+        return redirect(url('/clientes'));
     }
 }

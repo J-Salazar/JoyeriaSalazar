@@ -19,9 +19,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Clientes</a>
                         </li>
-{{--                        <li class="nav-item">--}}
-{{--                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--}}
-{{--                        </li>--}}
                     </ul>
 
                 </div>
@@ -42,42 +39,7 @@
                                             Inicio
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                                            Consulta
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                                            Proforma
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                                            Clientes
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                                            Proveedores
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                                            Control Interno
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                                            Historial
-                                        </a>
-                                    </li>
+
                                 </ul>
 
 

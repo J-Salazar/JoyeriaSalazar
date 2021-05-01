@@ -47,6 +47,36 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
+//        $request->validate([
+//            'name' => 'required',
+//        ]);
+
+        // ensure the request has a file before we attempt anything else.
+        if ($request->hasFile('file')) {
+
+            $request->validate([
+                'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
+            ]);
+
+            // Save the file locally in the storage/public/ folder under a new folder named /product
+            $request->file->store('product', 'public');
+
+            // Store the record, using the new file hashname which will be it's new filename identity.
+            $product = new Producto([
+                $cod = bin2hex(random_bytes(4)),
+                "codigo" => $cod,
+                "materiales" => $request->get('materiales'),
+                "peso" => $request->get('peso'),
+                "tipo" => $request->get('tipo'),
+                "precio" => $request->get('precio'),
+                "stock" => $request->get('stock'),
+
+                "direccion" => $request->file->hashName()
+            ]);
+            $product->save(); // Finally, save the record.
+        }
+
+        return redirect(url('/home'));
     }
 
     /**
@@ -66,9 +96,19 @@ class ProductoController extends Controller
      * @param  \App\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit(Producto $product, Request $request, $productoid)
     {
         //
+        Producto::Find($productoid)->update([
+'materiales' => $request->get('materiales'),
+'peso' => $request->get('peso'),
+'tipo' => $request->get('tipo'),
+'precio' => $request->get('precio'),
+'stock'=> $request->get('stock')]);
+
+        return redirect(url('/inventario'));
+
+
     }
 
     /**
@@ -107,6 +147,20 @@ class ProductoController extends Controller
         return view('usuario.inventario', ['productos' => $productos]);
     }
 
+    protected function agregar()
+    {
+
+
+        return view('usuario.nuevoproducto');
+    }
+
+    public function editar($productoid){
+
+        $producto = Producto::Find($productoid);
+
+        return view('usuario.editarproducto')->with('producto',$producto);
+
+    }
 
 
 }

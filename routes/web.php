@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
@@ -23,4 +23,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/productos', 'ProductoController@index')->name('productos');
 
+Route::get('/clientes', 'ClienteController@index')->name('clientes');
+
+Route::get('/registrarcliente', 'ClienteController@registrar')->name('registrarcliente');
+Route::post('/registrocliente', 'ClienteController@registro')->name('registro');
+
 Route::get('/inventario', 'ProductoController@inventario')->name('inventario');
+
+Route::get('/agregar', 'ProductoController@agregar')->name('nuevoproducto');
+Route::post('/guardarproducto', 'ProductoController@store')->name('agregarproducto');
+
+Route::get('/editarproducto/{productoid}','ProductoController@editar');
+Route::post('/editar/{productoid}','ProductoController@edit');

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style="background: linear-gradient(#3495e3, #ffffff)" >Inicio de Sesión</div>
+                <div class="card-header" style="background: linear-gradient(#b3d7f5, #ffffff)" >Inicio de Sesión</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -52,16 +52,12 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-12 offset-md-5 ">
                                 <button type="submit" class="btn btn-primary">
                                     Iniciar Sesión
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        ¿Olvidaste tu contraseña?
-                                    </a>
-                                @endif
+
                             </div>
                         </div>
                     </form>

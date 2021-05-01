@@ -17,7 +17,7 @@
                                 <a class="nav-link"   href="{{route('inventario')}}">Inventario</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Clientes</a>
+                                <a class="nav-link" href="{{route('clientes')}}">Clientes</a>
                             </li>
                             {{--                        <li class="nav-item">--}}
                             {{--                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>--}}
@@ -42,42 +42,7 @@
                                             Inicio
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                                            Consulta
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                                            Proforma
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                                            Clientes
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                                            Proveedores
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                                            Control Interno
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="nav-link link-dark">
-                                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                                            Historial
-                                        </a>
-                                    </li>
+
                                 </ul>
 
 
@@ -108,8 +73,17 @@
                                                             data-tipo="{{ $producto->tipo }}"
                                                             data-precio="{{ $producto->precio }}"
                                                             data-stock="{{ $producto->stock }}"
+                                                            data-direccion="{{ $producto->direccion }}"
                                                             >
-                                                        <img src="https://loremflickr.com/200/200/jewelry?lock=1" alt="">
+{{--                                                        <img src="https://loremflickr.com/200/200/jewelry?lock=1" alt="">--}}
+                                                        @if($producto->direccion == null)
+                                                            <img src="https://loremflickr.com/200/200/jewelry" alt="">
+                                                        @else
+                                                            <img src="{{ asset('storage/product/'.$producto->direccion) }}" width="200" height="200" alt="">
+                                                        @endif
+
+
+
                                                         <figcaption class="pt-2">Codigo: <span>{{ $producto->codigo }}</span></figcaption>
                                                     </button>
 
@@ -127,7 +101,8 @@
                                                                     <div class="container-fluid">
                                                                         <div class="row">
                                                                             <div class="col-12 d-flex justify-content-center">
-                                                                                <img src="https://loremflickr.com/600/600/jewelry?lock=1" alt="">
+{{--                                                                                <img src="https://loremflickr.com/600/600/jewelry?lock=1" alt="">--}}
+                                                                                <img id="img" src="{{ asset('storage/product/'.$producto->direccion) }}" alt="">
                                                                             </div>
                                                                             <figcaption class="pt-2 font-weight-bold text-dark">
                                                                                 Codigo: <span id="codigo" class="font-italic text-secondary"></span>
@@ -200,16 +175,18 @@
     <script>
         $(document).ready(
         $('#exampleModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var modalcodigo = button.data('codigo') // Extract info from data-* attributes
-            var modalmateriales = button.data('materiales') // Extract info from data-* attributes
-            var modalpeso = button.data('peso') // Extract info from data-* attributes
-            var modaltipo = button.data('tipo') // Extract info from data-* attributes
-            var modalprecio = button.data('precio') // Extract info from data-* attributes
-            var modalstock = button.data('stock') // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var button = $(event.relatedTarget)
+            var modalcodigo = button.data('codigo')
+            var modalmateriales = button.data('materiales')
+            var modalpeso = button.data('peso')
+            var modaltipo = button.data('tipo')
+            var modalprecio = button.data('precio')
+            var modalstock = button.data('stock')
+            var modaldireccion = button.data('direccion')
+
+
             var modal = $(this)
+            modal.find('#img').attr("src", "http://joyeriasalazar.test/storage/product/"+modaldireccion)
             modal.find('#codigo').text(modalcodigo)
             modal.find('#materiales').text(modalmateriales)
             modal.find('#peso').text(modalpeso)

@@ -38,18 +38,17 @@
 
                                 <ul class="nav nav-pills flex-column mb-auto">
                                     <li class="nav-item">
-                                        <a href="{{ route('inventario') }}" class="nav-link active">
+                                        <a href="{{ route('inventario') }}" class="nav-link link-dark">
                                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                                             Listado
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('nuevoproducto') }}" class="nav-link link-dark">
+                                        <a href="{{ route('nuevoproducto') }}" class="nav-link active">
                                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
                                             Agregar producto
                                         </a>
                                     </li>
-
                                 </ul>
 
 
@@ -63,36 +62,36 @@
                                     <div class="row">
                                         <div class="col-12">
 
-                                            <div id="accordion">
-                                                @foreach ($productos as $producto)
-                                                <div class="card">
-                                                    <div class="card-header" id="heading{{$producto->id}}">
-                                                        <h5 class="mb-0">
-                                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$producto->id}}" aria-expanded="false" aria-controls="collapse{{$producto->id}}">
-                                                                <span>{{$producto->codigo}}</span>
-                                                            </button>
-                                                        </h5>
-                                                    </div>
+                                            <form action="{{ url('/guardarproducto') }}" method="post" enctype="multipart/form-data">
+                                                @csrf
+                                            <label class="form-label" for="customFile">Imagen del producto</label>
+                                            <input type="file" name="file" class="form-control" id="customFile" required>
 
-                                                    <div id="collapse{{$producto->id}}" class="collapse" aria-labelledby="heading{{$producto->id}}" data-parent="#accordion">
-                                                        <div class="card-body d-inline-flex">
-                                                            <img class="rounded-top rounded-bottom pr-2" src="{{asset('storage/product/'.$producto->direccion)}}" width="200" height="150"  alt="">
-                                                            <p class="">Materiales: {{$producto->materiales}} <br>
-                                                                Peso: {{$producto->peso}}gr <br>
-                                                                Tipo: {{$producto->tipo}} <br>
-                                                                Precio: {{$producto->precio}} <br>
-                                                                Stock: {{$producto->stock}} <br>
-                                                                <a href="{{url('/editarproducto/'.$producto->id)}}">Editar</a>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @endforeach
-
-                                                {{ $productos->links() }}
+                                            <label for="materiales" class="col-form-label text-md-left">Materiales</label>
+                                            <input id="materiales" type="text" class="form-control" name="materiales" value="{{ old('materiales') }}" required autocomplete="materiales">
+                                            <label for="peso" class="col-form-label text-md-left">Peso</label>
+                                            <input id="peso" type="text" class="form-control" name="peso" value="{{ old('peso') }}" required autocomplete="peso">
+                                            <label for="tipo" class="col-form-label text-md-left">Tipo</label>
+                                            <input id="tipo" type="text" class="form-control" name="tipo" value="{{ old('tipo') }}" required autocomplete="tipo">
 
 
+                                            <div class="form-row mt-4">
+                                            <div class="input-group col-8">
+                                                <label for="precio" class="col-form-label text-md-left mr-3">Precio</label>
+                                                <input id="precio" type="text" class="form-control col-2" name="precio" value="{{ old('precio') }}" required autocomplete="precio">
+                                                <input id="" type="text" class="form-control col-2 disabled" name="" value="soles" readonly>
                                             </div>
+
+
+                                            <div class="input-group col-4">
+                                                <label for="stock" class="col-form-label text-md-left mr-3">Stock</label>
+                                                <input id="stock" type="number" class="form-control " name="stock" value="{{ old('stock') }}" required autocomplete="stock">
+                                                <input id="" type="text" class="form-control disabled" name="" value="unidades" readonly>
+                                            </div>
+
+                                                <div class="d-grid gap-2 col-12 mt-4">
+                                                    <button class="btn btn-primary" type="submit">Agregar</button>
+                                                </div>
 
                                         </div>
                                     </div>

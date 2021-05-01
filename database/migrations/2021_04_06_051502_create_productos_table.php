@@ -21,6 +21,7 @@ class CreateProductosTable extends Migration
             $table->string('tipo');
             $table->string('precio');
             $table->string('stock');
+            $table->string('direccion')->nullable();
             $table->timestamps();
         });
     }
